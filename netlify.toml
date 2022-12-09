@@ -1,5 +1,3 @@
 [build]
-  command = "./install_flutter.sh && flutter build web"
-
-[[plugins]]
-  package = "netlify-plugin-flutter"
+  command = "flutter build web"
+  image = "cirrusci/flutter"
