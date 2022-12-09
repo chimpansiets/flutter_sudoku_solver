@@ -1,0 +1,5 @@
+[build]
+  command = "./install_flutter.sh && flutter build web"
+
+[[plugins]]
+  package = "netlify-plugin-flutter"
