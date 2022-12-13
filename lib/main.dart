@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sudoku_solver/components/sudoku_board.dart';
-import 'package:sudoku_solver/components/sudoku_input.dart';
 import 'package:sudoku_solver/providers/sudoku_provider.dart';
 
 void main() {
@@ -45,18 +44,28 @@ class _MyHomePageState extends State<MyHomePage> {
         body: SizedBox(
           width: MediaQuery.of(context).size.width,
           child: Consumer<SudokuProvider>(
-            builder: (context, value, child) => Column(
+            builder: (context, provider, child) => Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                SudokuBoard(board: value.sudokuBoard),
-                const SudokuInput(),
+                SudokuBoard(board: provider.sudokuBoard),
+                const SizedBox(height: 20),
                 TextButton(
-                  onPressed: () {
+                  style: TextButton.styleFrom(
+                    foregroundColor: Colors.white,
+                    backgroundColor: Colors.blue,
+                  ),
+                  onPressed: () async {
                     SudokuProvider sudokuProvider =
                         Provider.of<SudokuProvider>(context, listen: false);
 
-                    // sudokuProvider.solve()
+                    if (await sudokuProvider.solve(0) == true) {
+                      print("Yay");
+                    } else {
+                      print("No solution exists");
+                      // TODO: Handle some UI notification here
+                    }
+                    sudokuProvider.notifyListeners();
                   },
                   child: const Text("Start Solving Magic"),
                 ),

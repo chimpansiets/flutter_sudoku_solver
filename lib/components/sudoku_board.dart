@@ -18,14 +18,14 @@ class _SudokuBoardState extends State<SudokuBoard> {
     SudokuProvider sudokuProvider =
         Provider.of<SudokuProvider>(context, listen: false);
 
-    return Container(
+    return SizedBox(
       height: 400,
       width: 400,
       child: GridView.builder(
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 9,
-          mainAxisSpacing: 5,
-          crossAxisSpacing: 5,
+          mainAxisSpacing: 1,
+          crossAxisSpacing: 1,
         ),
         scrollDirection: Axis.vertical,
         shrinkWrap: true,
@@ -34,7 +34,6 @@ class _SudokuBoardState extends State<SudokuBoard> {
           return SudokuCell(
             index,
             value: sudokuProvider.sudokuBoard[index],
-            selected: index == sudokuProvider.selectedIndex ? true : false,
           );
         },
       ),
