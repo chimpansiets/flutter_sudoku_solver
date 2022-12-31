@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:sudoku_solver/solve_sudoku.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -20,19 +22,14 @@ class MyApp extends StatelessWidget {
         colorScheme:
             ColorScheme.fromSwatch().copyWith(secondary: Colors.yellow),
       ),
-      home: const SudokuSolver(),
+      home: SudokuSolver(),
     );
   }
 }
 
-class SudokuSolver extends StatefulWidget {
-  const SudokuSolver({Key? key}) : super(key: key);
+class SudokuSolver extends StatelessWidget {
+  SudokuSolver({Key? key}) : super(key: key);
 
-  @override
-  _SudokuSolverState createState() => _SudokuSolverState();
-}
-
-class _SudokuSolverState extends State<SudokuSolver> {
   onSolvePressed() {
     // First, we need to convert the grid of TextEditingControllers into a 2D array of integers
     var grid = List.generate(
@@ -56,7 +53,6 @@ class _SudokuSolverState extends State<SudokuSolver> {
   }
 
   // Create a 9x9 grid of TextEditingController objects
-  // to handle the input of each Sudoku cell
   List<List<TextEditingController>> controllers = List.generate(
     9,
     (i) => List.generate(
@@ -72,11 +68,13 @@ class _SudokuSolverState extends State<SudokuSolver> {
         title: const Text('Sietse\'s ugly Sudoku Solver tool'),
       ),
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           // Create a 9x9 grid of TextField widgets,
           // each with its own TextEditingController
           for (int i = 0; i < 9; i++)
             Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 for (int j = 0; j < 9; j++)
                   Container(
